@@ -3,6 +3,7 @@ set number relativenumber
 set backspace=indent,eol,start
 set noswapfile
 set autowrite
+set completeopt-=preview
 
 inoremap jk <ESC>
 let mapleader = " "
@@ -26,6 +27,12 @@ inoremap {;<CR> {<CR>};<ESC>O
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
+
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 60vnew',
+      \ 'stack':      'rightbelow 10new',
+\ }
 
 call plug#begin('~/.vim/plugged')
 
