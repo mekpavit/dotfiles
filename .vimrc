@@ -4,6 +4,7 @@ set backspace=indent,eol,start
 set noswapfile
 set autowrite
 set completeopt-=preview
+set splitright
 
 inoremap jk <ESC>
 let mapleader = " "
