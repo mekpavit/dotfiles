@@ -56,7 +56,8 @@
   :commands (lsp lsp-deferred)
   :hook (go-mode . lsp-deferred)
   :config
-  (setq lsp-auto-guess-root nil))
+  (setq lsp-auto-guess-root nil)
+  (setq lsp-go-build-flags "-tags integration"))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -80,10 +81,5 @@
 (use-package! yasnippet
   :commands yas-minor-mode
   :hook (go-mode . yas-minor-mode))
-
-;; Setup flycheck to check other go build tags
-(use-package! flycheck
-  :config
-  (setq go-build-tags '("integration")))
 
 (use-package! go-impl)
