@@ -53,11 +53,12 @@
 ;; they are implemented.
 
 (use-package! lsp-mode
-  :commands (lsp lsp-deferred)
+  :commands 
+  (lsp lsp-deferred)
   :hook (go-mode . lsp-deferred)
   :config
   (setq lsp-auto-guess-root nil)
-  (setq lsp-go-build-flags "-tags integration"))
+  (setq lsp-gopls-build-flags ["-tags=integration"]))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -81,5 +82,3 @@
 (use-package! yasnippet
   :commands yas-minor-mode
   :hook (go-mode . yas-minor-mode))
-
-(use-package! go-impl)
