@@ -82,3 +82,11 @@
 (use-package! yasnippet
   :commands yas-minor-mode
   :hook (go-mode . yas-minor-mode))
+
+(use-package! dap-mode
+  :config
+  (dap-mode 1)
+  (require 'dap-go)
+  (require 'dap-hydra)
+  (dap-go-setup))
+
