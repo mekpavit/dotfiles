@@ -19,7 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
- (setq doom-font (font-spec :family "Inconsolata for Powerline" :size 17 :weight 'semi-light))
+ (setq doom-font (font-spec :family "Jetbrains Mono" :size 15 :weight 'semi-light))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -33,7 +33,6 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -88,5 +87,25 @@
   (dap-mode 1)
   (require 'dap-go)
   (require 'dap-hydra)
-  (dap-go-setup))
+  (dap-go-setup)
+  (dap-register-debug-template "Go Launch File with Integration Tag Configuration"
+                             (list :type "go"
+                                   :request "launch"
+                                   :name "Launch File"
+                                   :mode "auto"
+                                   :program nil
+                                   :buildFlags "-tags=integration"
+                                   :args nil
+                                   :env nil
+                                   :envFile nil)))
 
+(defun go-coverage-all ()
+  "Show go coverage of current buffer."
+  (interactive)
+  (shell-command "go test -tags=integration -coverprofile=cover.out ./...")
+  (go-coverage "cover.out"))
+
+(map! :map go-mode-map
+      :localleader
+      (:prefix ("c" . "coverage")
+       "a" #'go-coverage-all))
