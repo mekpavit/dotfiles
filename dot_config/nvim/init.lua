@@ -128,8 +128,10 @@ require('packer').startup(
         -- better search panel
         use "windwp/nvim-spectre"
 
-		-- Go related plugins
-		use "buoto/gotests-vim"
+        -- Go related plugins
+	use "buoto/gotests-vim"
+        use "mattn/vim-goaddtags"
+        use "rhysd/vim-go-impl"
 
     end
 )
@@ -225,6 +227,7 @@ vim.cmd([[augroup end]])
 -- Keymap for LSP
 vim.api.nvim_set_keymap('n', '<Leader>cD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<CR>', { noremap=true, silent=true })
+vim.api.nvim_set_keymap('i', '<C-h>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', '<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', '[e', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', ']e', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', { noremap=true, silent=true })
@@ -450,4 +453,8 @@ dap.configurations.scala = {
   },
 }
 require("dapui").setup()
+-- END
+
+-- START config Go-related plugins
+vim.g.go_addtags_transform = "camelcase"
 -- END
