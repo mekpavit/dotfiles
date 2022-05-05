@@ -101,6 +101,7 @@ require('packer').startup(
             - will try more...
         --]]
         use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
+        use {'nvim-telescope/telescope-ui-select.nvim' }
 
         -- abstract all languages test runner command into 4 simple vim commands
         use 'vim-test/vim-test'
@@ -233,11 +234,13 @@ vim.api.nvim_set_keymap('i', '<C-h>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>
 vim.api.nvim_set_keymap('n', '<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', '[e', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', ']e', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', { noremap=true, silent=true })
-vim.api.nvim_set_keymap("n", "<space>cf", "<cmd>lua vim.lsp.buf.formatting()<CR>", { noremap=true, silent=true })
-vim.api.nvim_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<Leader>cf", "<cmd>lua vim.lsp.buf.formatting()<CR>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap("n", "<Leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", { noremap=true, silent=true })
+vim.api.nvim_set_keymap('n', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', {noremap = true})
 -- END
 
 -- START config telescope
+require("telescope").load_extension("ui-select")
 local previewers = require('telescope.previewers')
 
 local new_maker = function(filepath, bufnr, opts)
@@ -278,7 +281,6 @@ vim.api.nvim_set_keymap('n', '<Leader>ff', '<cmd>:Telescope find_files<cr>', {no
 vim.api.nvim_set_keymap('n', '<Leader>fg', '<cmd>:Telescope live_grep<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>bi', '<cmd>:Telescope buffers<cr>', {noremap = true})
 
-vim.api.nvim_set_keymap('n', '<Leader>ca', '<cmd>:Telescope lsp_code_actions<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>cR', '<cmd>:Telescope lsp_references<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>ci', '<cmd>:Telescope lsp_implementations<cr>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>cd', '<cmd>:Telescope lsp_definitions<cr>', { noremap=true })
