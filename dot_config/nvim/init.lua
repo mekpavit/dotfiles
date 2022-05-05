@@ -80,7 +80,7 @@ require('packer').startup(
         use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
         -- ready-to-use metals - LSP for Scala
-        use 'scalameta/nvim-metals'
+        use { 'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" } }
 
         -- ready-tu-use jdt - LSP for Java
         use 'mfussenegger/nvim-jdtls'
@@ -88,6 +88,7 @@ require('packer').startup(
         -- various plugins for completion and snippeting
         use 'hrsh7th/nvim-cmp' -- Completion
         use 'hrsh7th/cmp-nvim-lsp'
+        use 'hrsh7th/cmp-buffer'
         -- use 'ray-x/lsp_signature.nvim' -- Show signature while typing
         use 'nvim-lua/lsp-status.nvim' -- Show LSP server status
 
@@ -206,6 +207,7 @@ metalsConfig.settings = {
     "akka.actor.typed.javadsl",
     "com.github.swagger.akka.javadsl"
   },
+  superMethodLensesEnabled = false,
 }
 metalsConfig.on_attach = function(client, bufnr)
   require("metals").setup_dap()
@@ -344,13 +346,33 @@ require('gitsigns').setup()
 -- END
 
 -- START config treesitter
-require('nvim-treesitter.configs').setup({
-    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    highlight = {
-      enable = true,              -- false will disable the whole extension
-      disable = {"scala"},
-    },
-})
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "scala", "go" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- List of parsers to ignore installing (for "all")
+  ignore_install = { "javascript" },
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    disable = { "scala" },
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 -- END
 
 -- START config nvim-autopairs
