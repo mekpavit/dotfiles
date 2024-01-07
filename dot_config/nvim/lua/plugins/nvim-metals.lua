@@ -39,6 +39,7 @@ return {
       metals_config.settings = {
         showImplicitArguments = true,
         excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
+        serverVersion = "1.2.0+36-0a2cd9db-SNAPSHOT",
       }
 
       -- *READ THIS*
