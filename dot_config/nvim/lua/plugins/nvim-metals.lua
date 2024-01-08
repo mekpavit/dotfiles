@@ -27,6 +27,14 @@ return {
                 runType = "testTarget",
               },
             },
+            {
+              type = "scala",
+              request = "attach",
+              name = "Attach debugger to Metals server",
+              buildTarget = "metals",
+              hostName = "localhost",
+              port = 5005,
+            },
           }
         end,
       },
@@ -39,7 +47,7 @@ return {
       metals_config.settings = {
         showImplicitArguments = true,
         excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-        serverVersion = "1.2.0+36-0a2cd9db-SNAPSHOT",
+        serverVersion = "1.2.0+48-5b51c221-SNAPSHOT",
       }
 
       -- *READ THIS*
