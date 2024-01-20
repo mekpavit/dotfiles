@@ -39,7 +39,7 @@ return {
         end,
       },
     },
-    ft = { "scala", "sbt", "java" },
+    ft = { "scala", "sbt" },
     opts = function()
       local metals_config = require("metals").bare_config()
 
@@ -47,7 +47,7 @@ return {
       metals_config.settings = {
         showImplicitArguments = true,
         excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-        serverVersion = "1.2.0+48-5b51c221-SNAPSHOT",
+        serverVersion = "1.2.0+75-860b11ef-SNAPSHOT",
       }
 
       -- *READ THIS*
