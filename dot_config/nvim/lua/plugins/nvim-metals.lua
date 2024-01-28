@@ -48,6 +48,7 @@ return {
         showImplicitArguments = true,
         excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
         serverVersion = "1.2.0+75-860b11ef-SNAPSHOT",
+        testUserInterface = "Test Explorer",
       }
 
       -- *READ THIS*
