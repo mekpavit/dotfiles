@@ -65,6 +65,19 @@ return {
         require("metals").setup_dap()
       end
 
+      -- Override metals/stauts to send to Noice mini
+      metals_config.handlers["metals/status"] = function(_, status)
+        local Manager = require("noice.message.manager")
+        local Message = require("noice.message")
+
+        if not status.hide then
+          local msg = Message("metals", "message", status.text)
+          msg.opts.title = "Metals"
+          msg.level = ""
+          msg.kind = "message"
+          Manager.add(msg)
+        end
+      end
       return metals_config
     end,
     config = function(self, metals_config)
