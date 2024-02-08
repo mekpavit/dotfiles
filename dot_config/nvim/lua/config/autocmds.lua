@@ -10,3 +10,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.b.autoformat = false
   end,
 })
+
+-- Disable auto-format of yaml file since it messes up double-qoute and single-qoute
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "yaml", "yml" },
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})
