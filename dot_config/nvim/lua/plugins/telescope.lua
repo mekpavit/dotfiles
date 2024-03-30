@@ -30,6 +30,7 @@ return {
           end,
         },
       },
+      vimgrep_arguments = { "rg", "--hidden", "--vimgrep" },
     },
     extensions = {
       live_grep_args = {
